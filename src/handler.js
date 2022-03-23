@@ -42,6 +42,7 @@ const getAllNotesHandler = () => ({
     notes,
   },
 });
+
 const getNoteByIdHandler = (request, h) => {
   const { id } = request.params;
   const note = notes.filter((n) => n.id === id)[0];
@@ -60,14 +61,12 @@ const getNoteByIdHandler = (request, h) => {
   response.code(404);
   return response;
 };
+
 const editNoteByIdHandler = (request, h) => {
   const { id } = request.params;
-
   const { title, tags, body } = request.payload;
   const updatedAt = new Date().toISOString();
-
   const index = notes.findIndex((note) => note.id === id);
-
   if (index !== -1) {
     notes[index] = {
       ...notes[index],
@@ -90,6 +89,7 @@ const editNoteByIdHandler = (request, h) => {
   response.code(404);
   return response;
 };
+
 const deleteNoteByIdHandler = (request, h) => {
   const { id } = request.params;
 
